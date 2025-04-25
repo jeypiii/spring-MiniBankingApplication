@@ -1,6 +1,6 @@
 package com.jbatrina.BankingApplication.service;
 
-import com.jbatrina.BankingApplication.dao.UserRepository;
+import com.jbatrina.BankingApplication.repository.UserRepository;
 import com.jbatrina.BankingApplication.dto.LoginDto;
 import com.jbatrina.BankingApplication.exceptions.AuthFailedException;
 import com.jbatrina.BankingApplication.exceptions.UserNotFoundException;

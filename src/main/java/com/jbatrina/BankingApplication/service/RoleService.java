@@ -1,6 +1,6 @@
 package com.jbatrina.BankingApplication.service;
 
-import com.jbatrina.BankingApplication.dao.RoleRepository;
+import com.jbatrina.BankingApplication.repository.RoleRepository;
 import com.jbatrina.BankingApplication.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

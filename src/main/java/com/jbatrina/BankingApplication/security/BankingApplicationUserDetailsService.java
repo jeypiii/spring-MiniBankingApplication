@@ -1,6 +1,6 @@
 package com.jbatrina.BankingApplication.security;
 
-import com.jbatrina.BankingApplication.dao.UserRepository;
+import com.jbatrina.BankingApplication.repository.UserRepository;
 import com.jbatrina.BankingApplication.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

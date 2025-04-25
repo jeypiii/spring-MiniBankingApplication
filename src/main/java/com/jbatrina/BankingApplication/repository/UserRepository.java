@@ -1,4 +1,4 @@
-package com.jbatrina.BankingApplication.dao;
+package com.jbatrina.BankingApplication.repository;
 
 import com.jbatrina.BankingApplication.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

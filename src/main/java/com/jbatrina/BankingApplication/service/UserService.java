@@ -1,6 +1,6 @@
 package com.jbatrina.BankingApplication.service;
 
-import com.jbatrina.BankingApplication.dao.UserRepository;
+import com.jbatrina.BankingApplication.repository.UserRepository;
 import com.jbatrina.BankingApplication.exceptions.AuthUserExistsException;
 import com.jbatrina.BankingApplication.exceptions.UserInvalidEmailException;
 import com.jbatrina.BankingApplication.exceptions.UserNotFoundException;
