@@ -12,7 +12,7 @@
 	<artifactId>BankingApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BankingApplication</name>
-	<description>A simple RESTful employee management system implemented with Spring boot. A Capstone project for the HTD – Java Developer training.</description>
+	<description>A simple RESTful banking application with balance inquiry, fund transfer, and transaction history. A Capstone project for the HTD – Java Developer training.</description>
 	<url/>
 	<licenses>
 		<license/>
