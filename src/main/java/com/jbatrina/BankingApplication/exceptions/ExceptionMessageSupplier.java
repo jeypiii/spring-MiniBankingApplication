@@ -41,10 +41,13 @@ public class ExceptionMessageSupplier {
 
 	public String getErrorMessage(String errorName, String defaultMessage) {
 		if (errorMessageMap.containsKey(errorName)) {
-			return errorMessageMap.get(errorName);
-		} else {
-			return defaultMessage;
+			String errorMessage = errorMessageMap.get(errorName);
+			if (! errorMessage.isBlank()) {
+				return errorMessage;
+			}
 		}
+
+		return defaultMessage;
 	}
 	
 	private static void loadErrorMessages() {
