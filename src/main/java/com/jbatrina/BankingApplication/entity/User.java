@@ -22,6 +22,11 @@ public class User {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int userId;
 
+    // personal detail(s)
+    @NotEmpty
+    @Column(nullable = false, unique = true)
+    private String name;
+  
     // login details
     @NotEmpty
     @Column(nullable = false, unique = true)
@@ -41,8 +46,9 @@ public class User {
     )
     private Set<Role> roles;
 
-    public User(String username, String email, String password, Set<Role> roles) {
-        this.username = username;
+    public User(String name, String username, String email, String password, Set<Role> roles) {
+    	this.name = name;
+    	this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;

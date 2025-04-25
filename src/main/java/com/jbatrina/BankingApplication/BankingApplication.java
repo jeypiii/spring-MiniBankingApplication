@@ -44,6 +44,7 @@ public class BankingApplication implements CommandLineRunner {
 			// add users
 			userService.addAdminUser(new User(
 					"admin",
+					"admin",
 					"admin@admin.com",
 					"user",	// password provided as separate arg
 					Set.of(adminRole)),
@@ -51,6 +52,7 @@ public class BankingApplication implements CommandLineRunner {
 			);
 
 			userService.addNormalUser(new User(
+					"customer",
 					"customer",
 					"customer@customer.com",
 					"customer",	// password provided as separate arg
