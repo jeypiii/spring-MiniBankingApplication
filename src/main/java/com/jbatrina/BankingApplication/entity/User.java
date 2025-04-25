@@ -34,13 +34,6 @@ public class User {
     @NotEmpty
     private String password;
 
-//    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//    @JoinTable(name = "user_employees",
-//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),
-//            inverseJoinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")
-//    )
-//    private Employee accountForEmployee;
-
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),

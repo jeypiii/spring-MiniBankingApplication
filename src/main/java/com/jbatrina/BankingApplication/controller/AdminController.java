@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jbatrina.BankingApplication.exceptions.AuthAdminRequiredException;
 import com.jbatrina.BankingApplication.service.AuthService;
-import com.jbatrina.BankingApplication.service.EmployeeService;
 
 public abstract class AdminController {
-    @Autowired
-    public EmployeeService employeeService;
     @Autowired
     public AuthService authService;
  
