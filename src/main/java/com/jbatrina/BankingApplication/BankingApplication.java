@@ -1,13 +1,17 @@
 package com.jbatrina.BankingApplication;
 
+import org.javamoney.moneta.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.jbatrina.BankingApplication.entity.Account;
+import com.jbatrina.BankingApplication.entity.Balance;
 import com.jbatrina.BankingApplication.entity.Role;
 import com.jbatrina.BankingApplication.entity.User;
+import com.jbatrina.BankingApplication.service.AccountService;
 import com.jbatrina.BankingApplication.service.RoleService;
 import com.jbatrina.BankingApplication.service.UserService;
 
@@ -20,6 +24,8 @@ public class BankingApplication implements CommandLineRunner {
 	UserService userService;
 	@Autowired
 	RoleService roleService;
+	@Autowired
+	AccountService accountService;
 
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String ddlAuto;
@@ -42,8 +48,10 @@ public class BankingApplication implements CommandLineRunner {
 			Role customerRole = roleService.addRole(new Role("CUSTOMER"));
 
 			// add users
-			userService.addAdminUser(new User(
-					"admin",
+			User adminUser = userService.addAdminUser(new User(
+					"admin first",
+					"adminLast",
+					"admin-middle",
 					"admin",
 					"admin@admin.com",
 					"user",	// password provided as separate arg
@@ -51,14 +59,50 @@ public class BankingApplication implements CommandLineRunner {
 					"admin"
 			);
 
-			userService.addNormalUser(new User(
-					"customer",
-					"customer",
-					"customer@customer.com",
-					"customer",	// password provided as separate arg
+			User customerAUser = userService.addNormalUser(new User(
+					"Mandy",
+					null,
+					"Mapagbigay",
+					"mapagbigay",
+					"mapagbigay@customer.com",
+					"mapagbigay",	// password provided as separate arg
 					Set.of(customerRole)),
-					"customer"
+					"mapagbigay"
 			);
+
+			User customerBUser = userService.addNormalUser(new User(
+					"Brett",
+					"Ree",
+					"Turisiv",
+					"brett",
+					"brett@customer.com",
+					"brett",	// password provided as separate arg
+					Set.of(customerRole)),
+					"brett"
+			);
+
+			User customerCUser = userService.addNormalUser(new User(
+					"Porque",
+					"No",
+					"Los Dos",
+					"porque",
+					"porque@customer.com",
+					"porque",	// password provided as separate arg
+					Set.of(customerRole)),
+					"porque"
+			);
+
+		
+			// populate with test accounts
+			Account accountA = accountService.addAccount(
+					new Account(customerAUser, new Balance(Money.of(100_000, "PHP").getNumber().doubleValueExact()))
+				);
+			Account accountB = accountService.addAccount(
+					new Account(customerBUser, new Balance(Money.of(500, "PHP").getNumber().doubleValueExact()))
+				);
+			Account accountC = accountService.addAccount(
+					new Account(customerCUser, new Balance(Money.of(8000, "PHP").getNumber().doubleValueExact()))
+				);
 		}
 	}
 }

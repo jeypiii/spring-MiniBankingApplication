@@ -23,12 +23,16 @@ public class User {
     private int userId;
 
     // personal detail(s)
-    @NotEmpty
-    @Column(nullable = false, unique = true)
-    private String name;
-  
+    @NotEmpty(message = "User must have first name")
+    private String firstName;
+    @Column(nullable = true)
+    private String middleName;
+    @NotEmpty(message = "User must have last name")
+    private String lastName;
+
     // login details
     @NotEmpty
+    @NotEmpty(message = "User must have (unique) username")
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false, unique = true)
@@ -37,6 +41,7 @@ public class User {
     private String email;
     @Column(nullable = false)
     @NotEmpty
+    @NotEmpty(message = "User must have password")
     private String password;
 
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -46,12 +51,20 @@ public class User {
     )
     private Set<Role> roles;
 
-    public User(String name, String username, String email, String password, Set<Role> roles) {
-    	this.name = name;
+    public User(String firstName, String middleName, String lastName, String username, String email, String password, Set<Role> roles) {
+    	this.firstName = firstName;
+    	this.middleName = middleName;
+    	this.lastName = lastName;
     	this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
     }
+    
+    @Override
+    public String toString() {
+        final boolean hasMiddleName = middleName != null && !middleName.isBlank();
 
+        return String.format("%s, %s%s", lastName.toUpperCase(), firstName, hasMiddleName ? (" " + middleName) : "");
+    }
 }
