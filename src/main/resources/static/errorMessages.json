@@ -1,0 +1,22 @@
+{
+    "AuthFailedException::WRONG_CREDENTIALS" : "Wrong combination",
+    "AuthFailedException::NO_CREDENTIALS": "No credentials for user found. Please try to log in again.",
+    "UserNotFoundException::NONEXISTENT_USER": "Attempting to authenticate with unregistered username/email",
+    "UserNotFoundException::NONEXISTENT_USER_ID": "No User with given Id",
+    "AuthAdminRequiredException::ADMIN_ONLY": "This action is only allowed for administrators",
+    "AuthUserExistsException::USERNAME_TAKEN": "The username is already taken.",
+    "AuthUserExistsException::EMAIL_TAKEN": "The email is already associated with another account.",
+    "AuthUserExistsException::INVALID_EMAIL": "The provided email is invalid.",
+    "DepartmentNotFoundException::NONEXISTENT_DEPARTMENT_BY_ID": "Attempting to get department by Id",
+    "DepartmentIdConflictException::ADD_DEPT_HAS_ID": "New department should not have ID",
+    "DepartmentNotFoundException::UPDATE_NONEXISTENT_DEPT": "Attempting to update non-existent department",
+    "DepartmentNotFoundException::REMOVE_NONEXISTENT_DEPT": "Attempting to remove non-existent department",
+    "EmployeeNotFoundException::ADD_NONEXISTENT_EMPLOYEE_TO_DEPT": "Attempting to add non-existent employee to a department",
+    "EmployeeNotFoundException::REMOVE_NONEXISTENT_EMPLOYEE": "Attempting to remove non-existent employee from a department",
+    "EmployeeNotFoundException::NONEXISTENT_BY_ID": "Attempting to get employee by Id",
+    "EmployeeNotFoundException::UPDATE_NONEXISTENT_EMPLOYEE": "Attempting to update non-existent employee",
+    "EmployeeIdConflictException::ADD_EMPLOYEE_HAS_ID": "New employee should not have ID",
+    "DepartmentAlreadyContainsEmployeeException::ADD_DUPLICATE_EMPLOYEE": "The employee is already part of this department",
+    "EmployeeNotFoundException::REMOVE_NONEXISTENT_FROM_DEPT": "Attempting to remove non-existent employee from department",
+    "EmployeeNotFoundException::REMOVE_NONMEMBER_FROM_DEPT": "Attempting to remove employee who is not part of this department"
+}
