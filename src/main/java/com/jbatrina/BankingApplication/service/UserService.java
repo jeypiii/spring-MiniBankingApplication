@@ -61,7 +61,7 @@ public class UserService {
     }
 
     public User addNormalUser(User user, String password) {
-        user.setRoles(Set.of(roleService.getUserRole()));
+        user.setRoles(Set.of(roleService.getCustomerRole()));
         return addUser(user, password);
     }
 

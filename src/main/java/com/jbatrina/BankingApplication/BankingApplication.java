@@ -39,7 +39,7 @@ public class BankingApplication implements CommandLineRunner {
 
 			// TODO: add roles and users to permanent storage
 			Role adminRole = roleService.addRole(new Role("ADMIN"));
-			Role userRole = roleService.addRole(new Role("USER"));
+			Role customerRole = roleService.addRole(new Role("CUSTOMER"));
 
 			// add users
 			userService.addAdminUser(new User(
@@ -51,11 +51,11 @@ public class BankingApplication implements CommandLineRunner {
 			);
 
 			userService.addNormalUser(new User(
-					"user",
-					"user@user.com",
-					"user",	// password provided as separate arg
-					Set.of(userRole)),
-					"user"
+					"customer",
+					"customer@customer.com",
+					"customer",	// password provided as separate arg
+					Set.of(customerRole)),
+					"customer"
 			);
 		}
 	}

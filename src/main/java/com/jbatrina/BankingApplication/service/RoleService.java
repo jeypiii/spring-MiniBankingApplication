@@ -32,8 +32,8 @@ public class RoleService {
         return getRole("ADMIN").orElseThrow(() -> new RuntimeException("Admin role not initialized"));
     }
 
-    public Role getUserRole() {
+    public Role getCustomerRole() {
         // TODO: proper exception
-        return getRole("USER").orElseThrow(() -> new RuntimeException("Admin role not initialized"));
+        return getRole("CUSTOMER").orElseThrow(() -> new RuntimeException("Customer role not initialized"));
     }
 }
