@@ -54,11 +54,11 @@ public class AccountController extends AdminController {
         return newAccount.getAccountId();
     }
 
-    @DeleteMapping("/removeAccount/{id}")
+    @DeleteMapping("/closeAccount/{id}")
     public void updateAccount(@PathVariable int id) {
     	requireUserId(accountService.getAccount(id).getUser().getUserId());
 
-        accountService.removeAccount(id);
+        accountService.closeAccount(id);
     }
     
     @GetMapping("/accountsOfUser/{userId}")

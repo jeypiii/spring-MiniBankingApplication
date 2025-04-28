@@ -54,15 +54,16 @@ public class AccountService {
         return accountRepository.findAll(pageable);
     }
 
-    public void removeAccount(int id) {
+    public void closeAccount(int id) {
         if (!accountRepository.findById(id).isPresent()) {
             throw new AccountNotFoundException(id).setContextMessage(
             		"Attempting to remove account ", "::REMOVE_NONEXISTENT_ACCOUNT");
         }
         
         Account account = getAccount(id);
+        account.closeAccount();
 
-        accountRepository.deleteById(id);
+        accountRepository.save(account);
     }
     
     public AccountDto makeAccountDto(Account account) {

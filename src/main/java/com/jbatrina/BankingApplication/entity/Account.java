@@ -3,6 +3,7 @@ package com.jbatrina.BankingApplication.entity;
 import java.time.LocalDateTime;
 
 import com.jbatrina.BankingApplication.exceptions.AccountInsufficientBalanceException;
+import com.jbatrina.BankingApplication.exceptions.AccountIsClosedException;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -68,6 +69,11 @@ public class Account {
     }
     
     public void withdraw(Balance requestedBalance) {
+        if (this.isClosed()) {
+            throw new AccountIsClosedException(accountId).setContextMessage(
+            		"You can't withdraw from a closed account", "::WITHDRAW_CLOSED_ACCOUNT");
+        }
+
     	if (! hasBalance(requestedBalance)) {
 			throw new AccountInsufficientBalanceException(accountId)
 				.setContextMessage(
@@ -80,7 +86,26 @@ public class Account {
     }
 
     public void deposit(Balance addtlBalance) {
+        if (this.isClosed()) {
+            throw new AccountIsClosedException(accountId).setContextMessage(
+            		"You can't deposit to a closed account", "::DEPOSIT_CLOSED_ACCOUNT");
+        }
+
     	balance.deposit(addtlBalance);
+    }
+    
+    public void closeAccount() {
+        if (this.isClosed()) {
+            throw new AccountIsClosedException(accountId).setContextMessage(
+            		"The Account is already closed", "::DOUBLE_CLOSED_ACCOUNT");
+        }
+
+    	this.setClosureTimeStamp(LocalDateTime.now());
+    }
+    
+    public boolean isClosed() {
+    	return this.getClosureTimeStamp() == null 
+    			|| this.getClosureTimeStamp().isBefore(LocalDateTime.now());
     }
     
     @Override
