@@ -13,6 +13,7 @@ public class BankingApplicationExceptionResponse {
     @ExceptionHandler(BankingApplicationException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ResponseEntity<String> BankingApplicationExceptionHandler(BankingApplicationException exception) {
+    	exception.printStackTrace();
         return ResponseEntity
                 .status(exception.getHttpStatus())
                 .body(exception.getContextMessage());
@@ -22,6 +23,8 @@ public class BankingApplicationExceptionResponse {
     @ExceptionHandler(java.sql.SQLException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ResponseEntity<String> SQLErrorHandler(java.sql.SQLException exception) {
+    	exception.printStackTrace();
+ 
     	if (exception instanceof java.sql.SQLIntegrityConstraintViolationException
     		&& exception.getMessage().contains("Duplicate")
     		&& exception.getMessage().contains("departments.")

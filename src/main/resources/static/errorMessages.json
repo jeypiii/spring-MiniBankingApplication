@@ -1,8 +1,9 @@
 {
-    "AuthFailedException::WRONG_CREDENTIALS" : "Wrong combination",
+    "AuthFailedException::WRONG_CREDENTIALS" : "Wrong credentials (username/email and password combo)",
     "AuthFailedException::NO_CREDENTIALS": "No credentials for user found. Please try to log in again.",
     "UserNotFoundException::NONEXISTENT_USER": "Attempting to authenticate with unregistered username/email",
     "UserNotFoundException::NONEXISTENT_USER_ID": "No User with given Id",
+    "UserIdMismatchException::NONEXISTENT_USER_ID": "",
     "AuthAdminRequiredException::ADMIN_ONLY": "This action is only allowed for administrators",
     "AuthUserExistsException::USERNAME_TAKEN": "The username is already taken.",
     "AuthUserExistsException::EMAIL_TAKEN": "The email is already associated with another account.",
