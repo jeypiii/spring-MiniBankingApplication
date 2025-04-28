@@ -25,9 +25,21 @@ import lombok.Setter;
 @Embeddable
 public class BalanceDto {
 	// NOTE: update whenever new balances are added
+	@NotNull
 	BigDecimal depositBalance;
 	BigDecimal totalBalance;
 	
+	public Balance toBalance() {
+		if (depositBalance == null) {
+			throw new BankingApplicationException(-1)
+				.setContextMessage(
+						"BalanceDto should be complete for conversion to Balance",
+						"::BALANCEDTO_HASNULL"
+					);
+		}
+		return Balance.ofBase(depositBalance);
+	}
+
 	public static BalanceDto of(Balance balance) {
 		return new BalanceDto(
 			/* depositBalance = */ balance.getDepositBalance().getNumberStripped(),

@@ -80,6 +80,10 @@ public class TransactionService {
     }
     
     	
+    public Transaction createFundTransfer(TransactionDto transactionDto) {
+    	return createFundTransfer(fromTransactionDto(transactionDto));
+    }
+
     public Transaction createFundTransfer(Transaction transaction) {
     	Account sourceAccount = transaction.getSourceAccount();
     	Account targetAccount = transaction.getTargetAccount();
@@ -144,6 +148,18 @@ public class TransactionService {
     			BalanceDto.of(transaction.getAffectedBalance()),
     			transaction.getCreationTimeStamp(),
     			transaction.getClosureTimeStamp()
+			);
+    }
+    
+    public Transaction fromTransactionDto(TransactionDto transactionDto) {
+		return new Transaction(
+				transactionDto.getTransactionId(),
+				transactionDto.getTransactionType(),
+				accountService.getAccount(transactionDto.getSourceAccountId()),
+				accountService.getAccount(transactionDto.getTargetAccountId()),
+				transactionDto.getAffectedBalance().toBalance(),
+				transactionDto.getCreationTimeStamp(),
+				transactionDto.getClosureTimeStamp()
 			);
     }
 }
