@@ -41,4 +41,16 @@ public class Balance {
 	public Money getNetBalance() {
 		return depositBalance;
 	}
+	
+	public static Balance of(BigDecimal amount) {
+		return new Balance(Money.of(amount, baseCurrencyCode));
+	}
+
+	public static Balance of(int amount) {
+		return new Balance(Money.of(amount, baseCurrencyCode));
+	}
+
+	public static Balance of(BigDecimal amount, String currencyCode) {
+		return new Balance(Money.of(amount, currencyCode));
+	}
 }

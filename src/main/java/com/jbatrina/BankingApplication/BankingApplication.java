@@ -102,13 +102,13 @@ public class BankingApplication implements CommandLineRunner {
 			
 			// populate with test accounts
 			Account accountA = accountService.addAccount(
-					new Account(customerAUser, savingsType, new Balance(Money.of(100_000, "PHP")))
+					new Account(customerAUser, savingsType, Balance.of(100_000))
 				);
 			Account accountA2 = accountService.addAccount(
-					new Account(customerAUser, checkingType, new Balance(Money.of(200_000, "PHP")))
+					new Account(customerAUser, checkingType, Balance.of(200_000))
 				);
 			Account accountB = accountService.addAccount(
-					new Account(customerBUser, savingsType, new Balance(Money.of(500, "PHP")))
+					new Account(customerBUser, savingsType, Balance.of(500))
 				);
 			Account accountC = accountService.addAccount(
 					new Account(customerCUser, savingsType, new Balance(Money.of(8000, "PHP")))
