@@ -52,4 +52,15 @@ public class AccountController extends AdminController {
         requireAdmin();
         accountService.removeAccount(id);
     }
+    
+    @GetMapping("/accountsOfUser/{userId}")
+    public Page<AccountDto> getAllAccountsOfUserByPage(
+    		@PathVariable int userId,
+    		@RequestParam(defaultValue = "1") int pageNo,
+            @RequestParam(defaultValue = "5") int pageSize
+		) {
+
+        return accountService.getAllAccountsOfUserByPage(userId, pageNo, pageSize)
+        		.map((acc) -> accountService.makeAccountDto(acc));
+    }
 }

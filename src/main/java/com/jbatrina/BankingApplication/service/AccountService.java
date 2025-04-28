@@ -73,4 +73,21 @@ public class AccountService {
     			account.getAccountType()
 			);
     }
+
+	public Page<Account> getAllAccountsOfUserByPage(int userId, int pageNo, int pageSize) {
+    	// on the caller side, we set pageNo to be 1-indexed
+    	// but PageRequest is 0-indexed, so we just subtract by one
+    	// and set the minimum page to 1
+    	--pageNo;
+    	pageNo = Math.max(0, pageNo);
+
+    	Pageable pageable;
+    	if (pageSize > 0) {
+			pageable = PageRequest.of(pageNo, pageSize);
+    	} else {
+			pageable = Pageable.unpaged();
+    	}
+
+        return accountRepository.findAllByUserUserId(userId, pageable);
+	}
 }
