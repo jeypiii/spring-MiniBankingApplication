@@ -42,11 +42,11 @@ public class Balance {
 		return depositBalance;
 	}
 	
-	public static Balance of(BigDecimal amount) {
+	public static Balance ofBase(BigDecimal amount) {
 		return new Balance(Money.of(amount, baseCurrencyCode));
 	}
 
-	public static Balance of(int amount) {
+	public static Balance ofBase(int amount) {
 		return new Balance(Money.of(amount, baseCurrencyCode));
 	}
 
