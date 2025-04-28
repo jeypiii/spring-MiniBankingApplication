@@ -35,6 +35,11 @@ public class Account {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private User user;
+ 
+    @NotNull
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "accountType_id", referencedColumnName = "typeId")
+    private AccountType accountType;
     
     @NotNull
     @Embedded
@@ -49,9 +54,10 @@ public class Account {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime closureTimeStamp;
    
-    public Account(User user, Balance balance) {
+    public Account(User user, AccountType accountType, Balance balance) {
     	this.user = user;
     	this.balance = balance;
+    	this.accountType = accountType;
     	this.creationTimeStamp = LocalDateTime.now();
     }
 }

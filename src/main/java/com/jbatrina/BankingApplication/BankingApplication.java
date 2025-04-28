@@ -8,10 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.jbatrina.BankingApplication.entity.Account;
+import com.jbatrina.BankingApplication.entity.AccountType;
 import com.jbatrina.BankingApplication.entity.Balance;
 import com.jbatrina.BankingApplication.entity.Role;
 import com.jbatrina.BankingApplication.entity.User;
 import com.jbatrina.BankingApplication.service.AccountService;
+import com.jbatrina.BankingApplication.service.AccountTypeService;
 import com.jbatrina.BankingApplication.service.RoleService;
 import com.jbatrina.BankingApplication.service.UserService;
 
@@ -25,6 +27,8 @@ public class BankingApplication implements CommandLineRunner {
 	RoleService roleService;
 	@Autowired
 	AccountService accountService;
+	@Autowired
+	AccountTypeService accountTypeService;
 
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String ddlAuto;
@@ -92,18 +96,22 @@ public class BankingApplication implements CommandLineRunner {
 			);
 
 		
+			// seed with basic account types
+			AccountType checkingType = accountTypeService.addAccountType("CHECKINGS");
+			AccountType savingsType = accountTypeService.addAccountType("SAVINGS");
+			
 			// populate with test accounts
 			Account accountA = accountService.addAccount(
-					new Account(customerAUser, new Balance(Money.of(100_000, "PHP")))
+					new Account(customerAUser, savingsType, new Balance(Money.of(100_000, "PHP")))
 				);
 			Account accountA2 = accountService.addAccount(
-					new Account(customerAUser, new Balance(Money.of(200_000, "PHP")))
+					new Account(customerAUser, checkingType, new Balance(Money.of(200_000, "PHP")))
 				);
 			Account accountB = accountService.addAccount(
-					new Account(customerBUser, new Balance(Money.of(500, "PHP")))
+					new Account(customerBUser, savingsType, new Balance(Money.of(500, "PHP")))
 				);
 			Account accountC = accountService.addAccount(
-					new Account(customerCUser, new Balance(Money.of(8000, "PHP")))
+					new Account(customerCUser, savingsType, new Balance(Money.of(8000, "PHP")))
 				);
 		}
 	}
