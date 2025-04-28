@@ -9,6 +9,7 @@ import com.jbatrina.BankingApplication.exceptions.TransactionInsufficientBalance
 import com.jbatrina.BankingApplication.exceptions.TransactionNotFoundException;
 import com.jbatrina.BankingApplication.entity.Account;
 import com.jbatrina.BankingApplication.entity.Balance;
+import com.jbatrina.BankingApplication.dto.BalanceDto;
 import com.jbatrina.BankingApplication.entity.Transaction;
 import com.jbatrina.BankingApplication.entity.TransactionType;
 

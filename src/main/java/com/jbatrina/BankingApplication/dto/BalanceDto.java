@@ -1,10 +1,11 @@
-package com.jbatrina.BankingApplication.entity;
+package com.jbatrina.BankingApplication.dto;
 
 import java.math.BigDecimal;
 
 import org.javamoney.moneta.Money;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jbatrina.BankingApplication.entity.Balance;
 import com.jbatrina.BankingApplication.util.MoneyToBigDecimalConverter;
 
 import jakarta.persistence.Column;
