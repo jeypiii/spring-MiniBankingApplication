@@ -132,6 +132,9 @@ public class BankingApplication implements CommandLineRunner {
 			Transaction transferTransaction = transactionService.createFundTransfer(
 					new Transaction(accountA, accountB, fundTransferTransaction, Balance.ofBase(1000))
 				);
+			Transaction transferTransaction2 = transactionService.createFundTransfer(
+					new Transaction(accountC, accountA, fundTransferTransaction, Balance.ofBase(233))
+				);
 		}
 	}
 }

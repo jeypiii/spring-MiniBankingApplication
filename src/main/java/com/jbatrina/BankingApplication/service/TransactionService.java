@@ -5,7 +5,6 @@ import com.jbatrina.BankingApplication.repository.TransactionRepository;
 import com.jbatrina.BankingApplication.repository.TransactionTypeRepository;
 import com.jbatrina.BankingApplication.exceptions.TransactionException;
 import com.jbatrina.BankingApplication.exceptions.TransactionIdConflictException;
-import com.jbatrina.BankingApplication.exceptions.TransactionInsufficientBalanceException;
 import com.jbatrina.BankingApplication.exceptions.TransactionNotFoundException;
 import com.jbatrina.BankingApplication.entity.Account;
 import com.jbatrina.BankingApplication.entity.Balance;
@@ -15,6 +14,9 @@ import com.jbatrina.BankingApplication.entity.Transaction;
 import com.jbatrina.BankingApplication.entity.TransactionType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,7 +41,7 @@ public class TransactionService {
         return transaction;
     }
 
-    public Transaction getById(int transactionId) {
+    public Transaction getTransaction(int transactionId) {
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new TransactionNotFoundException(transactionId).setContextMessage(
                 		"No Transaction with Id " + transactionId, "::NONEXISTENT_TRANSACTION_ID")
@@ -47,6 +49,23 @@ public class TransactionService {
 
         return transaction;
     }
+    
+	public Page<Transaction> getAllTransactionsOfAccountByPage(int accountId, int pageNo, int pageSize) {
+    	// on the caller side, we set pageNo to be 1-indexed
+    	// but PageRequest is 0-indexed, so we just subtract by one
+    	// and set the minimum page to 1
+    	--pageNo;
+    	pageNo = Math.max(0, pageNo);
+
+    	Pageable pageable;
+    	if (pageSize > 0) {
+			pageable = PageRequest.of(pageNo, pageSize);
+    	} else {
+			pageable = Pageable.unpaged();
+    	}
+
+        return transactionRepository.findAllBySourceAccountAccountIdOrTargetAccountAccountId(accountId, accountId, pageable);
+	}
     
     public Transaction closeTransaction(Transaction transaction) {
     	transaction.setClosureTimeStamp(LocalDateTime.now());
