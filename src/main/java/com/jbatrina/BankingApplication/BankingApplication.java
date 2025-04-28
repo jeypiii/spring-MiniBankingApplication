@@ -15,7 +15,6 @@ import com.jbatrina.BankingApplication.service.AccountService;
 import com.jbatrina.BankingApplication.service.RoleService;
 import com.jbatrina.BankingApplication.service.UserService;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @SpringBootApplication
@@ -96,6 +95,9 @@ public class BankingApplication implements CommandLineRunner {
 			// populate with test accounts
 			Account accountA = accountService.addAccount(
 					new Account(customerAUser, new Balance(Money.of(100_000, "PHP")))
+				);
+			Account accountA2 = accountService.addAccount(
+					new Account(customerAUser, new Balance(Money.of(200_000, "PHP")))
 				);
 			Account accountB = accountService.addAccount(
 					new Account(customerBUser, new Balance(Money.of(500, "PHP")))
