@@ -1,16 +1,16 @@
 package com.jbatrina.BankingApplication.service;
 
-import com.jbatrina.BankingApplication.repository.AccountRepository;
-import com.jbatrina.BankingApplication.exceptions.AccountIdConflictException;
-import com.jbatrina.BankingApplication.exceptions.AccountNotFoundException;
-import com.jbatrina.BankingApplication.entity.Account;
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import com.jbatrina.BankingApplication.dto.AccountDto;
+import com.jbatrina.BankingApplication.entity.Account;
+import com.jbatrina.BankingApplication.exceptions.AccountIdConflictException;
+import com.jbatrina.BankingApplication.exceptions.AccountNotFoundException;
+import com.jbatrina.BankingApplication.repository.AccountRepository;
 
 @Service
 public class AccountService {
@@ -28,12 +28,51 @@ public class AccountService {
         return account;
     }
 
-    public Account getById(int accountId) {
+    public Account getAccount(int accountId) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new AccountNotFoundException(accountId).setContextMessage(
                 		"No Account with Id " + accountId, "::NONEXISTENT_ACCOUNT_ID")
-                		);
+		);
 
         return account;
+    }
+
+    public Page<Account> getAllAccountsByPage(int pageNo, int pageSize) {
+    	// on the caller side, we set pageNo to be 1-indexed
+    	// but PageRequest is 0-indexed, so we just subtract by one
+    	// and set the minimum page to 1
+    	--pageNo;
+    	pageNo = Math.max(0, pageNo);
+
+    	Pageable pageable;
+    	if (pageSize > 0) {
+			pageable = PageRequest.of(pageNo, pageSize);
+    	} else {
+			pageable = Pageable.unpaged();
+    	}
+
+        return accountRepository.findAll(pageable);
+    }
+
+    public void removeAccount(int id) {
+        if (!accountRepository.findById(id).isPresent()) {
+            throw new AccountNotFoundException(id).setContextMessage(
+            		"Attempting to remove account ", "::REMOVE_NONEXISTENT_ACCOUNT");
+        }
+        
+        Account account = getAccount(id);
+
+        accountRepository.deleteById(id);
+    }
+    
+    public AccountDto makeAccountDto(Account account) {
+    	return new AccountDto(
+    			account.getAccountId(),
+    			account.getUser().getUserId(),
+    			account.getUser().toString(),
+    			account.getAccountType(),
+    			account.getBalance(),
+    			account.getBalance().getNetBalance()
+			);
     }
 }
