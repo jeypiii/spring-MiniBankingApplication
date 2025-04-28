@@ -2,6 +2,8 @@ package com.jbatrina.BankingApplication.entity;
 
 import java.time.LocalDateTime;
 
+import com.jbatrina.BankingApplication.exceptions.AccountInsufficientBalanceException;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -64,4 +66,28 @@ public class Account {
     public boolean hasBalance(Balance requestedBalance) {
     	return balance.hasAdequateBalance(requestedBalance);
     }
+    
+    public void withdraw(Balance requestedBalance) {
+    	if (! hasBalance(requestedBalance)) {
+			throw new AccountInsufficientBalanceException(accountId)
+				.setContextMessage(
+						String.format("Account %s has insufficient balance for this transfer", this),
+						"::ACCOUNT_INSUFFICIENT_BALANCE"
+					);
+    	}
+    	
+    	balance.withdraw(requestedBalance);
+    }
+
+    public void deposit(Balance addtlBalance) {
+    	balance.deposit(addtlBalance);
+    }
+    
+    @Override
+    public String toString() {
+    	return String.format("%s account for %s (Id: %d)",
+    			accountType.getName(), user.toString(), accountId
+			);
+    }
+    
 }

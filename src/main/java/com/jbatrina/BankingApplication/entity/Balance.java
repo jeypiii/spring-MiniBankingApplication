@@ -43,7 +43,29 @@ public class Balance {
 		return depositBalance;
 	}
 	
+	public Balance getAbsoluteValue() {
+		// NOTE: update BalanceDTO whenever new balance types are added
+		return new Balance(
+				depositBalance.abs()
+			);
+	}
+	
+	public Balance withdraw(Balance other) {
+		// NOTE: update BalanceDTO whenever new balance types are added
+		depositBalance.subtract(other.getAbsoluteValue().getDepositBalance());
+		
+		return this;
+	}
+
+	public Balance deposit(Balance other) {
+		// NOTE: update BalanceDTO whenever new balance types are added
+		depositBalance.add(other.getAbsoluteValue().getDepositBalance());
+		
+		return this;
+	}
+	
 	public boolean hasAdequateBalance(Balance requestedBalance) {
+		// NOTE: update BalanceDTO whenever new balance types are added
 		if (! (depositBalance.isGreaterThanOrEqualTo(requestedBalance.getDepositBalance()))) {
 			return false;
 		}

@@ -12,6 +12,8 @@
     "AccountNotFoundException::NONEXISTENT_ACCOUNT_ID": "",
     "AccountNotFoundException::UPDATE_NONEXISTENT_EMPLOYEE": "",
     "AccountNotFoundException::::REMOVE_NONEXISTENT_ACCOUNT": "",
+    "AccountInsufficientBalanceException::ACCOUNT_INSUFFICIENT_BALANCE": "",
     "TransactionIdConflictException::ADD_TRANSACTION_HAS_ID": "",
-    "TransactionNotFoundException::NONEXISTENT_TRANSACTION_ID": ""
+    "TransactionNotFoundException::NONEXISTENT_TRANSACTION_ID": "",
+    "TransactionInsufficientBalanceException::TRANSACTION_INSUFFICIENT_BALANCE": ""
 }
