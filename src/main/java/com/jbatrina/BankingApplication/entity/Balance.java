@@ -52,14 +52,14 @@ public class Balance {
 	
 	public Balance withdraw(Balance other) {
 		// NOTE: update BalanceDTO whenever new balance types are added
-		depositBalance.subtract(other.getAbsoluteValue().getDepositBalance());
+		depositBalance = depositBalance.subtract(other.getAbsoluteValue().getDepositBalance());
 		
 		return this;
 	}
 
 	public Balance deposit(Balance other) {
 		// NOTE: update BalanceDTO whenever new balance types are added
-		depositBalance.add(other.getAbsoluteValue().getDepositBalance());
+		depositBalance = depositBalance.add(other.getAbsoluteValue().getDepositBalance());
 		
 		return this;
 	}

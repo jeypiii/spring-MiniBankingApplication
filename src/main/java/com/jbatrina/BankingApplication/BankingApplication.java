@@ -128,10 +128,8 @@ public class BankingApplication implements CommandLineRunner {
 			TransactionType fundTransferTransaction = transactionTypeService.addTransactionType("FUND_TRANSFER");
 			
 			// Initialize sample transactions
-			Transaction balanceTransaction = transactionService.addSelfTransaction(
-					accountA, balanceCheckTransaction
-				);
-			Transaction transferTransaction = transactionService.addTransaction(
+			Transaction balanceTransaction = transactionService.createBalanceCheck(accountA);
+			Transaction transferTransaction = transactionService.createFundTransfer(
 					new Transaction(accountA, accountB, fundTransferTransaction, Balance.ofBase(1000))
 				);
 		}

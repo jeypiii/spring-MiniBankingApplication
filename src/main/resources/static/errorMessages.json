@@ -15,5 +15,8 @@
     "AccountInsufficientBalanceException::ACCOUNT_INSUFFICIENT_BALANCE": "",
     "TransactionIdConflictException::ADD_TRANSACTION_HAS_ID": "",
     "TransactionNotFoundException::NONEXISTENT_TRANSACTION_ID": "",
-    "TransactionInsufficientBalanceException::TRANSACTION_INSUFFICIENT_BALANCE": ""
+    "TransactionInsufficientBalanceException::TRANSACTION_INSUFFICIENT_BALANCE": "",
+    "TransactionException::FUND_TRANSFER_NOINIT": "",
+    "TransactionException::BALANCE_CHECK_NOINIT": "",
+    "TransactionException::TRANSACTION_FUND_TRANSFER_WRONGTYPE": ""
 }
