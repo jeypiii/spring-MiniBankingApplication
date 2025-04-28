@@ -4,6 +4,7 @@ import com.jbatrina.BankingApplication.dto.BalanceDto;
 import com.jbatrina.BankingApplication.dto.TransactionDto;
 import com.jbatrina.BankingApplication.exceptions.TransactionIdConflictException;
 import com.jbatrina.BankingApplication.entity.Transaction;
+import com.jbatrina.BankingApplication.service.AccountService;
 import com.jbatrina.BankingApplication.service.TransactionService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController extends AdminController {
     @Autowired
     TransactionService transactionService;
+    @Autowired
+    AccountService accountService;
 
 //    @GetMapping("/transactions")
 //    public Page<TransactionDto> getAllTransactionsByPage(
@@ -45,5 +48,12 @@ public class TransactionController extends AdminController {
 
         return transactionService.getAllTransactionsOfAccountByPage(accountId, pageNo, pageSize)
         		.map((acc) -> transactionService.makeTransactionDto(acc));
+    }
+ 
+    @PostMapping("/fundTransfer")
+    public TransactionDto transferFunds(@Valid @RequestBody TransactionDto transactionDto) {
+    	return transactionService.makeTransactionDto(
+    			transactionService.createFundTransfer(transactionDto)
+			);
     }
 }

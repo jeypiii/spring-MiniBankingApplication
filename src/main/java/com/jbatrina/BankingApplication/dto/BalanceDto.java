@@ -6,6 +6,7 @@ import org.javamoney.moneta.Money;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jbatrina.BankingApplication.entity.Balance;
+import com.jbatrina.BankingApplication.exceptions.BankingApplicationException;
 import com.jbatrina.BankingApplication.util.MoneyToBigDecimalConverter;
 
 import jakarta.persistence.Column;

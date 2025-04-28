@@ -18,5 +18,6 @@
     "TransactionInsufficientBalanceException::TRANSACTION_INSUFFICIENT_BALANCE": "",
     "TransactionException::FUND_TRANSFER_NOINIT": "",
     "TransactionException::BALANCE_CHECK_NOINIT": "",
-    "TransactionException::TRANSACTION_FUND_TRANSFER_WRONGTYPE": ""
+    "TransactionException::TRANSACTION_FUND_TRANSFER_WRONGTYPE": "",
+    "BankingApplicationException::BALANCEDTO_HASNULL": ""
 }
