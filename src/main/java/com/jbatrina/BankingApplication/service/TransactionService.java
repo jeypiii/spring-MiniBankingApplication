@@ -10,6 +10,7 @@ import com.jbatrina.BankingApplication.exceptions.TransactionNotFoundException;
 import com.jbatrina.BankingApplication.entity.Account;
 import com.jbatrina.BankingApplication.entity.Balance;
 import com.jbatrina.BankingApplication.dto.BalanceDto;
+import com.jbatrina.BankingApplication.dto.TransactionDto;
 import com.jbatrina.BankingApplication.entity.Transaction;
 import com.jbatrina.BankingApplication.entity.TransactionType;
 
@@ -113,5 +114,17 @@ public class TransactionService {
 		closeTransaction(t);
 		
 		return t;
+    }
+
+    public TransactionDto makeTransactionDto(Transaction transaction) {
+    	return new TransactionDto(
+    			transaction.getTransactionId(),
+    			transaction.getTransactionType(),
+    			transaction.getSourceAccount().getAccountId(),
+    			transaction.getTargetAccount().getAccountId(),
+    			BalanceDto.of(transaction.getAffectedBalance()),
+    			transaction.getCreationTimeStamp(),
+    			transaction.getClosureTimeStamp()
+			);
     }
 }
