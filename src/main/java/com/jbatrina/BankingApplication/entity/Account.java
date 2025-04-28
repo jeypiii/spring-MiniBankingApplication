@@ -60,4 +60,8 @@ public class Account {
     	this.accountType = accountType;
     	this.creationTimeStamp = LocalDateTime.now();
     }
+    
+    public boolean hasBalance(Balance requestedBalance) {
+    	return balance.hasAdequateBalance(requestedBalance);
+    }
 }

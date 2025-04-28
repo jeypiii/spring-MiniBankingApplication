@@ -3,6 +3,7 @@ package com.jbatrina.BankingApplication.controller;
 import com.jbatrina.BankingApplication.exceptions.AccountIdConflictException;
 import com.jbatrina.BankingApplication.dto.AccountDto;
 import com.jbatrina.BankingApplication.entity.Account;
+import com.jbatrina.BankingApplication.entity.BalanceDto;
 import com.jbatrina.BankingApplication.service.AccountService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -62,5 +63,10 @@ public class AccountController extends AdminController {
 
         return accountService.getAllAccountsOfUserByPage(userId, pageNo, pageSize)
         		.map((acc) -> accountService.makeAccountDto(acc));
+    }
+
+    @GetMapping("/getBalance/{id}")
+    public BalanceDto getAccountBalane(@PathVariable int id) {
+        return BalanceDto.of(accountService.getAccount(id).getBalance());
     }
 }

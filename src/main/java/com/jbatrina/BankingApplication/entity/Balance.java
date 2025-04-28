@@ -43,6 +43,14 @@ public class Balance {
 		return depositBalance;
 	}
 	
+	public boolean hasAdequateBalance(Balance requestedBalance) {
+		if (! (depositBalance.isGreaterThanOrEqualTo(requestedBalance.getDepositBalance()))) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public static Balance ofBase(BigDecimal amount) {
 		return new Balance(Money.of(amount, baseCurrencyCode));
 	}
