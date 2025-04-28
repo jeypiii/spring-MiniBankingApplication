@@ -21,6 +21,7 @@ import com.jbatrina.BankingApplication.service.TransactionService;
 import com.jbatrina.BankingApplication.service.TransactionTypeService;
 import com.jbatrina.BankingApplication.service.UserService;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @SpringBootApplication
@@ -110,13 +111,13 @@ public class BankingApplication implements CommandLineRunner {
 			
 			// populate with test accounts
 			Account accountA = accountService.addAccount(
-					new Account(customerAUser, savingsType, Balance.ofBase(100_000))
+					new Account(customerAUser, savingsType, Balance.ofBase(BigDecimal.valueOf(100000.1234)))
 				);
 			Account accountA2 = accountService.addAccount(
 					new Account(customerAUser, checkingType, Balance.ofBase(200_000))
 				);
 			Account accountB = accountService.addAccount(
-					new Account(customerBUser, savingsType, Balance.ofBase(500))
+					new Account(customerBUser, savingsType, Balance.ofBase(BigDecimal.valueOf(543.2101)))
 				);
 			Account accountC = accountService.addAccount(
 					new Account(customerCUser, savingsType, Balance.ofBase(8000))

@@ -1,9 +1,8 @@
 package com.jbatrina.BankingApplication.dto;
 
-import org.javamoney.moneta.Money;
+import java.math.BigDecimal;
 
 import com.jbatrina.BankingApplication.entity.AccountType;
-import com.jbatrina.BankingApplication.entity.Balance;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +18,7 @@ public class AccountDto {
 	int userId;
 	String ownerName;
 	AccountType accountType;
-	Balance balance;
-	Money totalBalance;
+	// TODO: use Balance to get all balance breakdown
+	//		for now we only use totalBalance for simplicity
+	BigDecimal totalBalance;
 }

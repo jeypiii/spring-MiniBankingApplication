@@ -71,8 +71,7 @@ public class AccountService {
     			account.getUser().getUserId(),
     			account.getUser().toString(),
     			account.getAccountType(),
-    			account.getBalance(),
-    			account.getBalance().getNetBalance()
+    			account.getBalance().getNetBalance().getNumberStripped()
 			);
     }
 }
