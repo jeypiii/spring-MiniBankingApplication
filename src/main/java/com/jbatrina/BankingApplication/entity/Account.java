@@ -104,8 +104,8 @@ public class Account {
     }
     
     public boolean isClosed() {
-    	return this.getClosureTimeStamp() == null 
-    			|| this.getClosureTimeStamp().isBefore(LocalDateTime.now());
+    	return this.getClosureTimeStamp() != null 
+    			&& this.getClosureTimeStamp().isBefore(LocalDateTime.now());
     }
     
     @Override
