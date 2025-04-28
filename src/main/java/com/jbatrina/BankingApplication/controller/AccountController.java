@@ -32,25 +32,32 @@ public class AccountController extends AdminController {
             @RequestParam(defaultValue = "5") int pageSize
 		) {
 
+    	requireAdmin();
+
         return accountService.getAllAccountsByPage(pageNo, pageSize)
         		.map((acc) -> accountService.makeAccountDto(acc));
     }
 
     @GetMapping("/account/{id}")
     public AccountDto getAccount(@PathVariable int id) {
-        return accountService.makeAccountDto(accountService.getAccount(id));
+    	AccountDto dto = accountService.makeAccountDto(accountService.getAccount(id));
+    	requireUserOrAdmin(dto.getUserId());
+
+        return dto;
     }
 
     @PostMapping("/addAccount")
     public int addAccount(@Valid @RequestBody Account account) throws AccountIdConflictException {
-        requireAdmin();
+    	requireUserOrAdmin(account.getUser().getUserId());
+
         Account newAccount = accountService.addAccount(account);
         return newAccount.getAccountId();
     }
 
     @DeleteMapping("/removeAccount/{id}")
     public void updateAccount(@PathVariable int id) {
-        requireAdmin();
+    	requireUserId(accountService.getAccount(id).getUser().getUserId());
+
         accountService.removeAccount(id);
     }
     
@@ -60,6 +67,7 @@ public class AccountController extends AdminController {
     		@RequestParam(defaultValue = "1") int pageNo,
             @RequestParam(defaultValue = "5") int pageSize
 		) {
+    	requireUserOrAdmin(userId);
 
         return accountService.getAllAccountsOfUserByPage(userId, pageNo, pageSize)
         		.map((acc) -> accountService.makeAccountDto(acc));
@@ -67,6 +75,9 @@ public class AccountController extends AdminController {
 
     @GetMapping("/getBalance/{id}")
     public BalanceDto getAccountBalane(@PathVariable int id) {
-        return BalanceDto.of(accountService.getAccount(id).getBalance());
+    	Account account = accountService.getAccount(id);
+    	requireUserOrAdmin(account.getUser().getUserId());
+
+        return BalanceDto.of(account.getBalance());
     }
 }

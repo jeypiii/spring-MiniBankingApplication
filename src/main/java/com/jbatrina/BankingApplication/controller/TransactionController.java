@@ -1,6 +1,7 @@
 package com.jbatrina.BankingApplication.controller;
 
 import com.jbatrina.BankingApplication.dto.TransactionDto;
+import com.jbatrina.BankingApplication.entity.Transaction;
 import com.jbatrina.BankingApplication.service.AccountService;
 import com.jbatrina.BankingApplication.service.TransactionService;
 
@@ -21,7 +22,13 @@ public class TransactionController extends AdminController {
 
     @GetMapping("/transaction/{id}")
     public TransactionDto getTransaction(@PathVariable int id) {
-        return transactionService.makeTransactionDto(transactionService.getTransaction(id));
+    	Transaction t = transactionService.getTransaction(id);
+    	requireUsersOrAdmin(new int []{
+    			t.getSourceAccount().getUser().getUserId(), 
+    			t.getTargetAccount().getUser().getUserId()
+			});
+
+        return transactionService.makeTransactionDto(t);
     }
 
     @GetMapping("/transactionsForAccount/{accountId}")
@@ -31,12 +38,20 @@ public class TransactionController extends AdminController {
             @RequestParam(defaultValue = "5") int pageSize
 		) {
 
+    	requireUserOrAdmin(accountService.getAccount(accountId).getUser().getUserId());
+ 
         return transactionService.getAllTransactionsOfAccountByPage(accountId, pageNo, pageSize)
         		.map((acc) -> transactionService.makeTransactionDto(acc));
     }
  
     @PostMapping("/fundTransfer")
     public TransactionDto transferFunds(@Valid @RequestBody TransactionDto transactionDto) {
+    	Transaction t = transactionService.fromTransactionDto(transactionDto);
+    	requireUsers(new int []{
+    			t.getSourceAccount().getUser().getUserId(), 
+    			t.getTargetAccount().getUser().getUserId()
+			});
+
     	return transactionService.makeTransactionDto(
     			transactionService.createFundTransfer(transactionDto)
 			);
