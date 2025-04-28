@@ -2,17 +2,10 @@ package com.jbatrina.BankingApplication.dto;
 
 import java.math.BigDecimal;
 
-import org.javamoney.moneta.Money;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jbatrina.BankingApplication.entity.Balance;
 import com.jbatrina.BankingApplication.exceptions.BankingApplicationException;
-import com.jbatrina.BankingApplication.util.MoneyToBigDecimalConverter;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

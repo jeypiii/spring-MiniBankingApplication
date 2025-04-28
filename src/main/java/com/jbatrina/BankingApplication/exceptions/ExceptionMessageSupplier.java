@@ -2,7 +2,6 @@ package com.jbatrina.BankingApplication.exceptions;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.ClosedWatchServiceException;
@@ -11,14 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
 import java.nio.file.WatchService;
-import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

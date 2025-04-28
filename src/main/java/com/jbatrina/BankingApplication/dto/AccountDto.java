@@ -1,7 +1,5 @@
 package com.jbatrina.BankingApplication.dto;
 
-import java.math.BigDecimal;
-
 import com.jbatrina.BankingApplication.entity.AccountType;
 
 import lombok.AllArgsConstructor;
