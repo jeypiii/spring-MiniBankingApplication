@@ -1,9 +1,16 @@
 package com.jbatrina.BankingApplication.entity;
 
+import java.math.BigDecimal;
+
+import org.javamoney.moneta.Money;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jbatrina.BankingApplication.util.MoneyToBigDecimalConverter;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,14 +26,19 @@ public class Balance {
 	@JsonIgnore
 	private static String baseCurrencyCode = "PHP";
 
+	// NOTE: money stored in database as number with 19 digits and 4 decimal places
+	//		see https://stackoverflow.com/questions/582797/should-you-choose-the-money-or-decimalx-y-datatypes-in-sql-server
+	//      and https://opendata.stackexchange.com/questions/10346/what-specifications-are-out-there-for-the-precision-required-to-store-money
 	@NotNull
-	@Column(nullable = false)
-	private Double depositBalance;
+	@Digits(integer = 19, fraction = 4)
+	@Column(nullable = false, columnDefinition = "DECIMAL(19,4)")
+	@Convert(converter = MoneyToBigDecimalConverter.class)
+	private Money depositBalance;
 	
 	// open for extension - other types of balances can be added
 	// e.g. creditBalance
 	
-	public Double getNetBalance() {
+	public Money getNetBalance() {
 		return depositBalance;
 	}
 }
