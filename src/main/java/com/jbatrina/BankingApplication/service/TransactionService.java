@@ -101,7 +101,7 @@ public class TransactionService {
     
     public Transaction createBalanceCheck(Account account) {
     	// TODO: use TransactionTypeService to get this fund transfer type
-    	TransactionType balanceCheckTransaction = transactionTypeRepository.findByName("FUND_TRANSFER")
+    	TransactionType balanceCheckTransaction = transactionTypeRepository.findByName("BALANCE_CHECK")
     			.orElseThrow(() -> new TransactionException(-1)
 								.setContextMessage(
 										"Balance check transaction type not initialized",
