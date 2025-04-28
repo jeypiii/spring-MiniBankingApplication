@@ -11,10 +11,14 @@ import com.jbatrina.BankingApplication.entity.Account;
 import com.jbatrina.BankingApplication.entity.AccountType;
 import com.jbatrina.BankingApplication.entity.Balance;
 import com.jbatrina.BankingApplication.entity.Role;
+import com.jbatrina.BankingApplication.entity.Transaction;
+import com.jbatrina.BankingApplication.entity.TransactionType;
 import com.jbatrina.BankingApplication.entity.User;
 import com.jbatrina.BankingApplication.service.AccountService;
 import com.jbatrina.BankingApplication.service.AccountTypeService;
 import com.jbatrina.BankingApplication.service.RoleService;
+import com.jbatrina.BankingApplication.service.TransactionService;
+import com.jbatrina.BankingApplication.service.TransactionTypeService;
 import com.jbatrina.BankingApplication.service.UserService;
 
 import java.util.Set;
@@ -29,6 +33,10 @@ public class BankingApplication implements CommandLineRunner {
 	AccountService accountService;
 	@Autowired
 	AccountTypeService accountTypeService;
+	@Autowired
+	TransactionService transactionService;
+	@Autowired
+	TransactionTypeService transactionTypeService;
 
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String ddlAuto;
@@ -111,7 +119,19 @@ public class BankingApplication implements CommandLineRunner {
 					new Account(customerBUser, savingsType, Balance.ofBase(500))
 				);
 			Account accountC = accountService.addAccount(
-					new Account(customerCUser, savingsType, new Balance(Money.of(8000, "PHP")))
+					new Account(customerCUser, savingsType, Balance.ofBase(8000))
+				);
+			
+			// seed with basic transaction types
+			TransactionType balanceCheckTransaction = transactionTypeService.addTransactionType("BALANCE_CHECK");
+			TransactionType fundTransferTransaction = transactionTypeService.addTransactionType("FUND_TRANSFER");
+			
+			// Initialize sample transactions
+			Transaction balanceTransaction = transactionService.addSelfTransaction(
+					accountA, balanceCheckTransaction
+				);
+			Transaction transferTransaction = transactionService.addTransaction(
+					new Transaction(accountA, accountB, fundTransferTransaction, Balance.ofBase(1000))
 				);
 		}
 	}

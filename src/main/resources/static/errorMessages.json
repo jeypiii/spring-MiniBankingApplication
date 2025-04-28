@@ -9,5 +9,7 @@
     "AuthUserExistsException::INVALID_EMAIL": "The provided email is invalid.",
     "AccountIdConflictException::ADD_ACCOUNT_HAS_ID": "",
     "AccountIdConflictException::ADD_ACCOUNT_HAS_ID": "",
-    "AccountNotFoundException::NONEXISTENT_ACCOUNT_ID": ""
+    "AccountNotFoundException::NONEXISTENT_ACCOUNT_ID": "",
+    "TransactionIdConflictException::ADD_TRANSACTION_HAS_ID": "",
+    "TransactionNotFoundException::NONEXISTENT_TRANSACTION_ID": ""
 }
