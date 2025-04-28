@@ -18,7 +18,4 @@ public class AccountDto {
 	int userId;
 	String ownerName;
 	AccountType accountType;
-	// TODO: use Balance to get all balance breakdown
-	//		for now we only use totalBalance for simplicity
-	BigDecimal totalBalance;
 }

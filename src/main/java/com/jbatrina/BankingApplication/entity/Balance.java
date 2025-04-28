@@ -29,6 +29,7 @@ public class Balance {
 	// NOTE: money stored in database as number with 19 digits and 4 decimal places
 	//		see https://stackoverflow.com/questions/582797/should-you-choose-the-money-or-decimalx-y-datatypes-in-sql-server
 	//      and https://opendata.stackexchange.com/questions/10346/what-specifications-are-out-there-for-the-precision-required-to-store-money
+	// NOTE: update BalanceDTO whenever new balance types are added
 	@NotNull
 	@Digits(integer = 19, fraction = 4)
 	@Column(nullable = false, columnDefinition = "DECIMAL(19,4)")
