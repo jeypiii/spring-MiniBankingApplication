@@ -13,6 +13,7 @@ import lombok.Setter;
 @Setter
 public class AccountDto {
 	int accountId;
+	int accountNumber;
 	int userId;
 	String ownerName;
 	AccountType accountType;

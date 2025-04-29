@@ -76,6 +76,7 @@ public class AccountService {
     public AccountDto makeAccountDto(Account account) {
     	return new AccountDto(
     			account.getAccountId(),
+    			account.getAccountNumber(),
     			account.getUser().getUserId(),
     			account.getUser().toString(),
     			account.getAccountType()
