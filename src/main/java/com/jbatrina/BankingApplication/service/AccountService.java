@@ -24,6 +24,13 @@ public class AccountService {
             		"Attempting to add " + account, "::ADD_ACCOUNT_HAS_ID");
         }
         
+		// NOTE: 9-digit account number; For now, it is sequentially generated
+        // TODO: have a smarter scheme (e.g. unique randomly generated, or scheme to minimize digit transposition)
+        account.setAccountNumber(100000000 + account.getAccountId());
+        accountRepository.save(account);
+ 
+        // NOTE: we have to do this twice since the first call to save() computes the correct accountId
+        account.setAccountNumber(100000000 + account.getAccountId());
         accountRepository.save(account);
         return account;
     }

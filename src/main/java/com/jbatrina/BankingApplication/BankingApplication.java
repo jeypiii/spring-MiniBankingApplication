@@ -112,11 +112,11 @@ public class BankingApplication implements CommandLineRunner {
 			Account accountA = accountService.addAccount(
 					new Account(customerAUser, savingsType, Balance.ofBase(BigDecimal.valueOf(100000.1234)))
 				);
-			Account accountA2 = accountService.addAccount(
-					new Account(customerAUser, checkingType, Balance.ofBase(200_000))
-				);
 			Account accountB = accountService.addAccount(
 					new Account(customerBUser, savingsType, Balance.ofBase(BigDecimal.valueOf(543.2101)))
+				);
+			Account accountA2 = accountService.addAccount(
+					new Account(customerAUser, checkingType, Balance.ofBase(200_000))
 				);
 			Account accountC = accountService.addAccount(
 					new Account(customerCUser, savingsType, Balance.ofBase(8000))
