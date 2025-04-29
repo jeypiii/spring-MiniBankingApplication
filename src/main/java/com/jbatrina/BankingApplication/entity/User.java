@@ -65,6 +65,6 @@ public class User {
     public String toString() {
         final boolean hasMiddleName = middleName != null && !middleName.isBlank();
 
-        return String.format("%s, %s%s", lastName.toUpperCase(), firstName, hasMiddleName ? (" " + middleName) : "");
+        return String.format("%s, %s%s", lastName.toUpperCase(), firstName, hasMiddleName ? (" " + middleName.substring(0, 1).toUpperCase()) + "." : "");
     }
 }
