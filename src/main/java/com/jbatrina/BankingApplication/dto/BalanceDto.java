@@ -22,6 +22,7 @@ public class BalanceDto {
 	@NotNull
 	BigDecimal depositBalance;
 	BigDecimal totalBalance;
+	String currencyCode;
 	
 	public Balance toBalance() {
 		if (depositBalance == null) {
@@ -35,9 +36,11 @@ public class BalanceDto {
 	}
 
 	public static BalanceDto of(Balance balance) {
+		// TODO: don't assume that all balances use the same currency
 		return new BalanceDto(
 			/* depositBalance = */ balance.getDepositBalance().getNumberStripped(),
-			/* totalBalance = */ balance.getNetBalance().getNumberStripped()
+			/* totalBalance = */ balance.getNetBalance().getNumberStripped(),
+			/* currencyCode = */ balance.getNetBalance().getCurrency().getCurrencyCode()
 		);
 	}
 }
