@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.jbatrina.BankingApplication.dto.AccountDto;
+import com.jbatrina.BankingApplication.dto.BalanceDto;
+import com.jbatrina.BankingApplication.dto.AccountDetailsDto;
 import com.jbatrina.BankingApplication.entity.Account;
 import com.jbatrina.BankingApplication.exceptions.AccountIdConflictException;
 import com.jbatrina.BankingApplication.exceptions.AccountNotFoundException;
@@ -42,6 +44,10 @@ public class AccountService {
 		);
 
         return account;
+    }
+    
+    public AccountDetailsDto getAccountDetails(int accountId) {
+    	return makeAccountDetailsDto(getAccount(accountId));
     }
 
     public Page<Account> getAllAccountsByPage(int pageNo, int pageSize) {
@@ -80,6 +86,17 @@ public class AccountService {
     			account.getUser().getUserId(),
     			account.getUser().toString(),
     			account.getAccountType()
+			);
+    }
+
+    public AccountDetailsDto makeAccountDetailsDto(Account account) {
+    	return new AccountDetailsDto(
+    			account.getAccountId(),
+    			account.getAccountNumber(),
+    			account.getUser(),
+    			BalanceDto.of(account.getBalance()),
+    			account.getCreationTimeStamp(),
+    			account.getClosureTimeStamp()
 			);
     }
 

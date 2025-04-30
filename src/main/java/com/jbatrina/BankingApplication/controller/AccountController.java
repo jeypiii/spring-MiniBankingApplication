@@ -1,6 +1,7 @@
 package com.jbatrina.BankingApplication.controller;
 
 import com.jbatrina.BankingApplication.exceptions.AccountIdConflictException;
+import com.jbatrina.BankingApplication.dto.AccountDetailsDto;
 import com.jbatrina.BankingApplication.dto.AccountDto;
 import com.jbatrina.BankingApplication.dto.BalanceDto;
 import com.jbatrina.BankingApplication.entity.Account;
@@ -17,8 +18,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/")
 @CrossOrigin
 public class AccountController extends AdminController {
+
+    private final TransactionController transactionController;
     @Autowired
     AccountService accountService;
+
+    AccountController(TransactionController transactionController) {
+        this.transactionController = transactionController;
+    }
 
     @GetMapping("/")
     public void homePage(HttpServletResponse response) {
@@ -79,5 +86,13 @@ public class AccountController extends AdminController {
     	requireUserOrAdmin(account.getUser().getUserId());
 
         return BalanceDto.of(account.getBalance());
+    }
+
+    @GetMapping("/getAccountDetails/{id}")
+    public AccountDetailsDto getAccountDetails(@PathVariable int id) {
+    	AccountDetailsDto accountDetails = accountService.getAccountDetails(id);
+    	requireUserOrAdmin(accountDetails.getUser().getUserId());
+
+    	return accountDetails;
     }
 }
