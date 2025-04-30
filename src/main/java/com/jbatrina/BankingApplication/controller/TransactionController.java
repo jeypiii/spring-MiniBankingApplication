@@ -1,6 +1,8 @@
 package com.jbatrina.BankingApplication.controller;
 
+import com.jbatrina.BankingApplication.dto.BalanceDto;
 import com.jbatrina.BankingApplication.dto.TransactionDto;
+import com.jbatrina.BankingApplication.entity.Account;
 import com.jbatrina.BankingApplication.entity.Transaction;
 import com.jbatrina.BankingApplication.service.AccountService;
 import com.jbatrina.BankingApplication.service.TransactionService;
@@ -44,6 +46,15 @@ public class TransactionController extends AdminController {
         		.map((acc) -> transactionService.makeTransactionDto(acc));
     }
  
+    @GetMapping("/checkBalance/{accountId}")
+    public BalanceDto getBalanceCheck(@PathVariable int accountId) {
+    	Account account = accountService.getAccount(accountId);
+    	requireUserOrAdmin(account.getUser().getUserId());
+    	
+    	Transaction balanceCheck = transactionService.createBalanceCheck(account);
+        return BalanceDto.of(account.getBalance());
+    }
+
     @PostMapping("/fundTransfer")
     public TransactionDto transferFunds(@Valid @RequestBody TransactionDto transactionDto) {
     	Transaction t = transactionService.fromTransactionDto(transactionDto);
