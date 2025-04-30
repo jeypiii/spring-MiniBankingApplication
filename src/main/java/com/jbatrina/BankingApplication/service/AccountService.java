@@ -94,6 +94,8 @@ public class AccountService {
     			account.getAccountId(),
     			account.getAccountNumber(),
     			account.getUser(),
+    			account.getUser().toString(),
+    			account.getAccountType(),
     			BalanceDto.of(account.getBalance()),
     			account.getCreationTimeStamp(),
     			account.getClosureTimeStamp()
