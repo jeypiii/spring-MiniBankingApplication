@@ -159,7 +159,11 @@ public class TransactionService {
     			transaction.getTransactionId(),
     			transaction.getTransactionType(),
     			transaction.getSourceAccount().getAccountId(),
+    			transaction.getSourceAccount().getAccountNumber(),
+    			transaction.getSourceAccount().getUser().toString(),
     			transaction.getTargetAccount().getAccountId(),
+    			transaction.getTargetAccount().getAccountNumber(),
+    			transaction.getTargetAccount().getUser().toString(),
     			BalanceDto.of(transaction.getAffectedBalance()),
     			transaction.getCreationTimeStamp(),
     			transaction.getClosureTimeStamp()

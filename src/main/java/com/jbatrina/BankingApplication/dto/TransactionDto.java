@@ -21,7 +21,13 @@ public class TransactionDto {
     @NotNull
     Integer sourceAccountId;
     @NotNull
+    Integer sourceAccountNumber;
+    String sourceAccountOwnerName;
+    @NotNull
     Integer targetAccountId;
+    @NotNull
+    Integer targetAccountNumber;
+    String targetAccountOwnerName;
     @NotNull
     BalanceDto affectedBalance;
     private LocalDateTime creationTimeStamp;
