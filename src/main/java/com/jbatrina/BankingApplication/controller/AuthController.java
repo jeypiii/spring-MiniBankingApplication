@@ -31,6 +31,7 @@ public class AuthController {
 
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
         jwtAuthResponse.setAccessToken(token);
+        jwtAuthResponse.setUserId(this.authService.getCurrentUser().getUserId());
 
         return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }
