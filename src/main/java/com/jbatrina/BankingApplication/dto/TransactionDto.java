@@ -20,12 +20,14 @@ public class TransactionDto {
     TransactionType transactionType;
     @NotNull
     Integer sourceAccountId;
-    @NotNull
+    // @NotNull 
+    // TODO: find a way to make this NotNull only for OUTGOING Dtos
     Integer sourceAccountNumber;
     String sourceAccountOwnerName;
     @NotNull
     Integer targetAccountId;
-    @NotNull
+    // @NotNull 
+    // TODO: find a way to make this NotNull only for OUTGOING Dtos
     Integer targetAccountNumber;
     String targetAccountOwnerName;
     @NotNull

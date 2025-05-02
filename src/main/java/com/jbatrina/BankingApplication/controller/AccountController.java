@@ -53,6 +53,22 @@ public class AccountController extends AdminController {
         return dto;
     }
 
+    // TODO: make AccountInfo?Dto which only contains non-private data (accountId and accountNumber) instead of just returning int
+    @GetMapping("/getAccountIdForAccountNumber/{accountNumber}")
+    public int getAccountIdForAccountNumber(@PathVariable int accountNumber) {
+    	AccountDto dto = accountService.makeAccountDto(accountService.getByAccountNumber(accountNumber));
+
+        return dto.getAccountId();
+    }
+
+    @GetMapping("/getByAccountNumber/{accountNumber}")
+    public AccountDto getByAccountNumber(@PathVariable int accountNumber) {
+    	AccountDto dto = accountService.makeAccountDto(accountService.getByAccountNumber(accountNumber));
+    	requireUserOrAdmin(dto.getUserId());
+
+        return dto;
+    }
+
     @PostMapping("/addAccount")
     public int addAccount(@Valid @RequestBody Account account) throws AccountIdConflictException {
     	requireUserOrAdmin(account.getUser().getUserId());

@@ -45,6 +45,15 @@ public class AccountService {
 
         return account;
     }
+
+    public Account getByAccountNumber(int accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new AccountNotFoundException(accountNumber).setContextMessage(
+                		"No Account with account Number " + accountNumber, "::NONEXISTENT_ACCOUNT_NUMBER")
+		);
+
+        return account;
+    }
     
     public AccountDetailsDto getAccountDetails(int accountId) {
     	return makeAccountDetailsDto(getAccount(accountId));
