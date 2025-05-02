@@ -171,7 +171,7 @@ public class TransactionService {
     }
     
     public Transaction fromTransactionDto(TransactionDto transactionDto) {
-		return new Transaction(
+    	Transaction t = new Transaction(
 				transactionDto.getTransactionId(),
 				transactionDto.getTransactionType(),
 				accountService.getAccount(transactionDto.getSourceAccountId()),
@@ -180,5 +180,11 @@ public class TransactionService {
 				transactionDto.getCreationTimeStamp(),
 				transactionDto.getClosureTimeStamp()
 			);
+    	
+    	if (t.getCreationTimeStamp() == null) {
+    		t.setCreationTimeStamp(LocalDateTime.now());
+    	}
+    	
+    	return t;
     }
 }

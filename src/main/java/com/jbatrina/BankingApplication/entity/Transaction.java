@@ -14,13 +14,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -61,6 +61,10 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime closureTimeStamp;
    
+    public Transaction() {
+    	this.creationTimeStamp = LocalDateTime.now();
+    }
+    
     public Transaction(Account source, Account target, TransactionType transactionType, Balance affectedBalance) {
     	this.sourceAccount = source;
     	this.targetAccount = target;
