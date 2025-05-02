@@ -15,11 +15,11 @@
     "AccountNotFoundException::UPDATE_NONEXISTENT_EMPLOYEE": "",
     "AccountNotFoundException::::REMOVE_NONEXISTENT_ACCOUNT": "",
     "AccountInsufficientBalanceException::ACCOUNT_INSUFFICIENT_BALANCE": "",
-    "AccountIsClosedException::TRANSACTION_CLOSED_SOURCE", "",
-    "AccountIsClosedException::TRANSACTION_CLOSED_TARGET", "",
-    "AccountIsClosedException::WITHDRAW_CLOSED_ACCOUNT",""
-    "AccountIsClosedException::DEPOSIT_CLOSED_ACCOUNT",""
-    "AccountIsClosedException::DOUBLE_CLOSED_ACCOUNT",""
+    "AccountIsClosedException::TRANSACTION_CLOSED_SOURCE": "",
+    "AccountIsClosedException::TRANSACTION_CLOSED_TARGET": "",
+    "AccountIsClosedException::WITHDRAW_CLOSED_ACCOUNT": "",
+    "AccountIsClosedException::DEPOSIT_CLOSED_ACCOUNT": "",
+    "AccountIsClosedException::DOUBLE_CLOSED_ACCOUNT": "",
     "TransactionIdConflictException::ADD_TRANSACTION_HAS_ID": "",
     "TransactionNotFoundException::NONEXISTENT_TRANSACTION_ID": "",
     "TransactionInsufficientBalanceException::TRANSACTION_INSUFFICIENT_BALANCE": "",
