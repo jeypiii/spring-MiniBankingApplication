@@ -67,7 +67,6 @@ public class BankingApplicationException extends RuntimeException {
     	assert(identifier != null && (! identifier.startsWith("::")));
     	
     	String fullIdentifier = this.getClass().getSimpleName() + identifier;
-    	System.out.println("RETRIEVED exception message FOR " + fullIdentifier);
         this.contextMessage = ExceptionMessageSupplier.getInstance().getErrorMessage(
         		fullIdentifier,  
         		contextMessage

@@ -38,9 +38,12 @@ public class ExceptionMessageSupplier {
 		if (errorMessageMap.containsKey(errorName)) {
 			String errorMessage = errorMessageMap.get(errorName);
 			if (! errorMessage.isBlank()) {
+				System.out.println("RETRIEVED exception message FOR " + errorName);
 				return errorMessage;
 			}
+			System.out.println("NOTE: blank error message for " + errorName);
 		}
+    	System.out.println("using DEFAULT exception message FOR " + errorName);
 
 		return defaultMessage;
 	}
