@@ -49,7 +49,7 @@ public class TransactionController extends AdminController {
     @GetMapping("/checkBalance/{accountId}")
     public BalanceDto getBalanceCheck(@PathVariable int accountId) {
     	Account account = accountService.getAccount(accountId);
-    	requireUserOrAdmin(account.getUser().getUserId());
+    	requireUserId(account.getUser().getUserId());
     	
     	Transaction balanceCheck = transactionService.createBalanceCheck(account);
         return BalanceDto.of(account.getBalance());
