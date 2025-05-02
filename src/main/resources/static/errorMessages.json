@@ -4,6 +4,7 @@
     "UserNotFoundException::NONEXISTENT_USER": "Attempting to authenticate with unregistered username/email",
     "UserNotFoundException::NONEXISTENT_USER_ID": "No User with given Id",
     "UserIdMismatchException::NONEXISTENT_USER_ID": "",
+    "UserIdMismatchException::INCORRECT_USER": "Accounts can only be accessed or modified by the account owner",
     "AuthAdminRequiredException::ADMIN_ONLY": "This action is only allowed for administrators",
     "AuthUserExistsException::USERNAME_TAKEN": "The username is already taken.",
     "AuthUserExistsException::EMAIL_TAKEN": "The email is already associated with another account.",
