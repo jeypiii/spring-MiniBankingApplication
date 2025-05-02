@@ -17,4 +17,5 @@ public class AccountDto {
 	int userId;
 	String ownerName;
 	AccountType accountType;
+	boolean isClosed;
 }

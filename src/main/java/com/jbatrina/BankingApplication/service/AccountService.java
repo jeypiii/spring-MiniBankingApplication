@@ -94,7 +94,8 @@ public class AccountService {
     			account.getAccountNumber(),
     			account.getUser().getUserId(),
     			account.getUser().toString(),
-    			account.getAccountType()
+    			account.getAccountType(),
+    			account.isClosed()
 			);
     }
 
